@@ -14,5 +14,9 @@ public class User {
 
     String role;
 
+    String avatar;
+
+    String describe;
+
     String token;
 }

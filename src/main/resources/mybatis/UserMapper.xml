@@ -9,7 +9,21 @@
     </insert>
 
 <!--    List<User> getUserById(Integer uid);-->
-    <insert id="getUserById">
+    <select id="getUserById" resultType="User">
         select * from user where uid = #{uid}
-    </insert>
+    </select>
+
+    <update id="updateBasicInfo" parameterType="User">
+        update user set
+        nickname = #{user.nickname},
+        user.describe = #{user.describe}
+        where uid = #{user.uid}
+    </update>
+
+    <update id="updateCoreInfo" parameterType="User">
+        update user set
+        username = #{user.username},
+        user.password = #{user.password}
+        where uid = #{user.uid}
+    </update>
 </mapper>

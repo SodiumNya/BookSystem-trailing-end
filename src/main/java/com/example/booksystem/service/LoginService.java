@@ -19,7 +19,7 @@ public class LoginService {
         List<User> users = loginMapper.findUser(user);
 
         if(users.isEmpty()){
-            throw new ServiceException("用户名或密码错误");
+            throw new ServiceException("500", "用户名或密码错误");
         }
         user = users.get(0);
         String token  = TokenUtils.generateToken(user.getUid(), user.getPassword());

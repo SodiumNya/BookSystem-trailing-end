@@ -23,9 +23,14 @@ public class JwtInterception implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String token =request.getParameter("token");
+        String token =request.getParameter("Token");
+        if(StrUtil.isBlank(token)){
+            token = request.getHeader("Token");
+        }
+
         if(StrUtil.isBlank(token)){
             throw new ServiceException(ERR_CODE_401, "请登录");
+
         }
 
         String UserId;
@@ -40,7 +45,7 @@ public class JwtInterception implements HandlerInterceptor {
             throw new ServiceException(ERR_CODE_401, errMsg);
         }
         if(user == null){
-            throw new ServiceException(ERR_CODE_401, "用处不存在, 请重新登录");
+            throw new ServiceException(ERR_CODE_401, "用户不存在, 请重新登录");
 
         }
 
