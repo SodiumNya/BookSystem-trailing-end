@@ -26,4 +26,23 @@
         user.password = #{user.password}
         where uid = #{user.uid}
     </update>
+
+    <insert id="addBookToBookShelf">
+        insert into user_book(book_id, uid)
+        values(#{bookId}, #{uid})
+    </insert>
+
+    <select id="findBookFromBookShelf" resultType="Book">
+        select b.*
+        from user_book as ub left join book as b
+        on ub.book_id = b.book_id
+        where ub.uid = #{uid}
+    </select>
+
+    <delete id="removeBookFromBookShelf">
+        delete from user_book
+        where
+        user_book.uid = #{uid} and user_book.book_id = #{bookId}
+        limit #{start}, #{size}
+    </delete>
 </mapper>

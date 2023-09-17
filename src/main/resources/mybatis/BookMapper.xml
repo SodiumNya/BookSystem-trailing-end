@@ -17,5 +17,34 @@
         where
         book_id = #{bookId}
     </select>
+<!--    resultMap的属性配置得按照constructor、id、result、association、collection、discriminator的顺序。-->
+    <resultMap id="findBookWithShelfStatusMap" type="com.example.booksystem.entity.BookWithShelfStatus">
+
+        <result property="addedToShelf" column="added_to_shelf"/>
+
+        <association property="book" javaType="com.example.booksystem.entity.Book">
+            <id property="bookId" column="book_id"/>
+            <result property="bookTitle" column="book_title"/>
+            <result property="bookAuthor" column="book_author"/>
+            <result property="bookContent" column="book_content"/>
+            <result property="bookIntro" column="book_intro"/>
+            <result property="bookCover" column="book_cover"/>
+        </association>
+    </resultMap>
+
+    <select id="findBookWithShelfStatus" resultMap="findBookWithShelfStatusMap">
+        select b.*,
+            case
+                when ub.uid is null
+                then 0
+                else 1
+            end as added_to_shelf
+        from book as b
+        left join user_book as ub
+        on b.book_id = ub.book_id and ub.uid = #{uid}
+        where b.book_id = #{bookId}
+    </select>
+    
+
     
 </mapper>

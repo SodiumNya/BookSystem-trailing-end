@@ -3,11 +3,11 @@ package com.example.booksystem.controller;
 import cn.hutool.core.util.StrUtil;
 import com.example.booksystem.common.RestBean;
 import com.example.booksystem.entity.Book;
+import com.example.booksystem.entity.BookWithShelfStatus;
 import com.example.booksystem.service.BookService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,13 +26,13 @@ public class BookController {
         return RestBean.success(books).asJsonString();
     }
 
-    @GetMapping(value = "api/select/book/{bookId}", produces = { "text/html;charset=utf-8" })
-    public String getBook(@PathVariable String bookId){
-        if(StrUtil.isBlank(bookId)){
+    @GetMapping(value = "api/select/book/{bookId}/{uid}", produces = { "text/html;charset=utf-8" })
+    public String getBook(@PathVariable String bookId, @PathVariable String uid){
+        if(StrUtil.isBlank(bookId) || StrUtil.isBlank(uid)){
             return RestBean.failure(401, "请求参数错误").asJsonString();
         }
 
-        List<Book> book = bookService.getBook(bookId);
+        List<BookWithShelfStatus> book = bookService.findBookWithShelfStatus(bookId, uid);
 
         return RestBean.success(book.get(0)).asJsonString();
     }

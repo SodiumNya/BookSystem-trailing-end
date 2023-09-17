@@ -1,7 +1,7 @@
 package com.example.booksystem.service;
 
-import com.example.booksystem.controller.BookController;
 import com.example.booksystem.entity.Book;
+import com.example.booksystem.entity.BookWithShelfStatus;
 import com.example.booksystem.expection.ServiceException;
 import com.example.booksystem.mapper.BookMapper;
 import jakarta.annotation.Resource;
@@ -49,5 +49,14 @@ public class BookService {
             throw new ServiceException("401", "没有找到书");
         }
         return books;
+    }
+
+    public List<BookWithShelfStatus> findBookWithShelfStatus(String bookId, String uid){
+        List<BookWithShelfStatus> bookWithShelfStatusList = bookMapper.findBookWithShelfStatus(bookId, uid);
+
+        if(bookWithShelfStatusList.isEmpty()){
+            throw new ServiceException("401", "没有找到书");
+        }
+        return bookWithShelfStatusList;
     }
 }
