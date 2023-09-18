@@ -1,3 +1,6 @@
+server:
+  port: 9787
+  address: localhost
 spring:
   application:
     name: BookSystem
@@ -10,13 +13,16 @@ spring:
     user:
       name: user
       password: 123456
+  servlet:
+    multipart:
+      enabled: true
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: mybatis/*Mapper.xml
   type-aliases-package: com/example/booksystem/entity
-server:
-  port: 9787
+
+
 
 
 

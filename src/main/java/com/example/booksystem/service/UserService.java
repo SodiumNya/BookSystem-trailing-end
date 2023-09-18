@@ -1,18 +1,32 @@
 package com.example.booksystem.service;
 
+import cn.hutool.core.io.FileUtil;
 import com.example.booksystem.entity.Book;
 import com.example.booksystem.entity.User;
 import com.example.booksystem.expection.ServiceException;
 import com.example.booksystem.mapper.UserMapper;
 import com.example.booksystem.uitls.TokenUtils;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserService {
+
+
+    @Value("${server.port}")
+    private String serverPort;
+
+    @Value("${server.address}")
+    private String serverAddress;
+    private static final String ROOT_PATH = System.getProperty("user.dir") + File.separator + "files";
+
     @Resource
     UserMapper userMapper;
 
@@ -96,5 +110,30 @@ public class UserService {
             bookData.add(bookRow);
         }
         return bookData;
+    }
+
+    public String updateUserAvatar(MultipartFile file, String uid) throws IOException {
+        String originFileName = file.getOriginalFilename();
+        String mainName = FileUtil.mainName(originFileName);
+        String extName = FileUtil.extName(originFileName);
+
+        if(!FileUtil.exist(ROOT_PATH)){
+            FileUtil.mkdir(ROOT_PATH);
+        }
+
+        if(FileUtil.exist(ROOT_PATH + File.separator + originFileName)) {
+            originFileName = System.currentTimeMillis() + "_" + mainName + "." + extName;
+        }
+
+        File saveFile = new File(ROOT_PATH + File.separator + originFileName);
+        file.transferTo(saveFile);
+
+        String url = "http://" + serverAddress + ":" + serverPort + "/files/download/" + originFileName;
+
+        Integer res = userMapper.updateUserAvatar(url, uid);
+        if(res < 0){
+            throw new ServiceException("401", "更新失败");
+        }
+        return url;
     }
 }

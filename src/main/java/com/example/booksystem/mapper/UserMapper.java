@@ -23,4 +23,7 @@ public interface UserMapper {
     Integer removeBookFromBookShelf(@Param("bookId")String bookId, @Param("uid")String uid);
     List<Book> findBookFromBookShelf(@Param("uid") String uid, @Param("start") Integer start, @Param("size") Integer size);
 
+    Integer updateUserAvatar(@Param("avatarUrl") String avatarUrl, @Param("uid") String uid);
+
+
 }

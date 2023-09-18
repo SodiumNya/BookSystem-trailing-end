@@ -27,10 +27,17 @@
         where uid = #{user.uid}
     </update>
 
+    <update id="updateUserAvatar">
+        update user set
+        avatar = #{avatarUrl}
+        where uid = #{uid}
+    </update>
+
     <insert id="addBookToBookShelf">
         insert into user_book(book_id, uid)
         values(#{bookId}, #{uid})
     </insert>
+
 
     <select id="findBookFromBookShelf" resultType="Book">
         select b.*
@@ -43,6 +50,6 @@
         delete from user_book
         where
         user_book.uid = #{uid} and user_book.book_id = #{bookId}
-        limit #{start}, #{size}
+<!--        limit #{start}, #{size}-->
     </delete>
 </mapper>
