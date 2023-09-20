@@ -23,4 +23,10 @@
         user.describe = #{user.describe}
         where uid = #{user.uid}
     </update>
+
+    <update id="reSetAvatar">
+        update user set
+        avatar = #{avatarUrl}
+        where uid = #{uid}
+    </update>
 </mapper>

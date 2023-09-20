@@ -36,4 +36,8 @@ public class AdminService {
         }
         return usersInfo;
     }
+
+    public String reSetAvatar(String uid){
+        return "http://localhost:9787/files/download/1695021417059_ddd.webp";
+    }
 }

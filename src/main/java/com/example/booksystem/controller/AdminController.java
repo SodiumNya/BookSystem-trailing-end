@@ -39,4 +39,14 @@ public class AdminController {
         List<User> users = adminService.getUsersInfo(selectedRole, searchInput, currentPage, PageSize);
         return RestBean.success(users).asJsonString();
     }
+
+    @GetMapping("api/admin/user/reSet/avatar{uid}")
+    public String reSetAvatar(@PathVariable String uid){
+        if(StrUtil.isBlank(uid)){
+            return RestBean.failure(401, "参数请求错误").asJsonString();
+        }
+        String url = adminService.reSetAvatar(uid);
+
+        return RestBean.success(url).asJsonString();
+    }
 }

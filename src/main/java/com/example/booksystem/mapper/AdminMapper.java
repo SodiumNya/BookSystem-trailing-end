@@ -17,5 +17,5 @@ public interface AdminMapper {
             @Param("start") Integer start,
             @Param("size") Integer size);
 
-
+    Integer reSetAvatar(@Param("uid") String uid, @Param("avatarUrl") String avatarUrl);
 }
