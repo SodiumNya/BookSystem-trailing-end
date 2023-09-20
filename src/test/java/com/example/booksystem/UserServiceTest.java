@@ -1,7 +1,7 @@
 package com.example.booksystem;
 
 import com.example.booksystem.entity.User;
-import com.example.booksystem.mapper.LoginMapper;
+import com.example.booksystem.mapper.WebMapper;
 import com.example.booksystem.service.RegisterService;
 import com.example.booksystem.service.UserService;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import java.util.List;
 public class UserServiceTest {
 
     @Autowired
-    private LoginMapper loginMapper;
+    private WebMapper loginMapper;
 
     @Autowired
     private RegisterService registerService;
@@ -27,7 +27,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    public void testGetUserByUsername() throws SQLIntegrityConstraintViolationException {
+    public void testGetUserByUsername() {
         String username = "1234";
         String password = "1";
         User user = new User();
@@ -39,7 +39,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void add() throws SQLIntegrityConstraintViolationException {
+    public void add() {
         String username = "1234";
         String password = "1";
         User user = new User();
@@ -50,7 +50,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void update() throws SQLIntegrityConstraintViolationException {
+    public void update() {
         String username = "1234";
         String password = "1";
         String uid = "2";

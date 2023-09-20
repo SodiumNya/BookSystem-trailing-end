@@ -2,7 +2,7 @@ package com.example.booksystem.service;
 
 import com.example.booksystem.entity.User;
 import com.example.booksystem.expection.ServiceException;
-import com.example.booksystem.mapper.LoginMapper;
+import com.example.booksystem.mapper.WebMapper;
 import com.example.booksystem.uitls.TokenUtils;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class LoginService {
+public class WebService {
 
     @Resource
-    LoginMapper loginMapper;
+    WebMapper webMapper;
 
     public User findUser(User user){
-        List<User> users = loginMapper.findUser(user);
+        List<User> users = webMapper.findUser(user);
 
         if(users.isEmpty()){
             throw new ServiceException("500", "用户名或密码错误");
@@ -25,5 +25,20 @@ public class LoginService {
         String token  = TokenUtils.generateToken(user.getUid(), user.getPassword());
         user.setToken(token);
         return user;
+    }
+
+    public Integer insertUser(User user){
+
+        List<User> users = webMapper.getUserById(user);
+        if(!users.isEmpty()){
+            return 0;
+        }
+        Integer res = webMapper.insertUser(user);
+        System.out.println("返回结果"+res);
+        return res;
+    }
+
+    public List<String> getRoles(){
+        return webMapper.getRoles();
     }
 }
