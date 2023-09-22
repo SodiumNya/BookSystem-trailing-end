@@ -6,7 +6,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.example.booksystem.entity.User;
+import com.example.booksystem.core.entity.User;
 import com.example.booksystem.expection.ServiceException;
 import com.example.booksystem.service.UserService;
 import jakarta.annotation.Resource;

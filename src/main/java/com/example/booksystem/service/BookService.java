@@ -1,7 +1,10 @@
 package com.example.booksystem.service;
 
-import com.example.booksystem.entity.Book;
-import com.example.booksystem.entity.BookWithShelfStatus;
+import com.example.booksystem.common.RestBean;
+import com.example.booksystem.core.entity.Book;
+import com.example.booksystem.core.entity.BookWithShelfStatus;
+import com.example.booksystem.core.request.Result;
+import com.example.booksystem.core.vo.SplitPageDTO;
 import com.example.booksystem.expection.ServiceException;
 import com.example.booksystem.mapper.BookMapper;
 import jakarta.annotation.Resource;
@@ -16,7 +19,7 @@ public class BookService {
     @Resource
     BookMapper bookMapper;
 
-    public List<List<Book>> getBookList(String data, String currentPage, String PageSize){
+    public Result<List<List<Book>>> getBookList(String data, String currentPage, String PageSize){
         Integer start = (Integer.parseInt(currentPage) - 1) * Integer.parseInt(PageSize);
         Integer size = Integer.parseInt(PageSize);
         List<Book> books = bookMapper.getBookList(data, start, size);
@@ -28,17 +31,30 @@ public class BookService {
         List<List<Book>> bookData = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             List<Book> bookRow = new ArrayList<>();
+            boolean end = false;
             for (int j = 0; j < 5; j++) {
                 if(books.size()-1 < i*5+j){
                     bookData.add(bookRow);
-                    return bookData;
+                    end = true;
+                    break;
                 }
                 bookRow.add(books.get(i*5 + j));
+            }
+            if(end){
+                break;
             }
             bookData.add(bookRow);
         }
 
-        return bookData;
+        SplitPageDTO splitPageDTO = bookMapper.getCount(data);
+
+        splitPageDTO.setPageSize(Integer.parseInt(PageSize));
+        splitPageDTO.setCurrentPage(Integer.parseInt(currentPage));
+
+        Result<List<List<Book>>> res = new Result<>();
+        res.setSplitPageDTO(splitPageDTO);
+        res.setData(bookData);
+        return res;
     }
 
     public List<Book> getBook(String bookId){
@@ -59,4 +75,29 @@ public class BookService {
         }
         return bookWithShelfStatusList;
     }
+
+    public Book updateBook(Book book){
+        Integer res = bookMapper.updateBook(book);
+        if(res < 0){
+            throw new ServiceException("更新失败，请重试");
+        }
+        List<Book> newBooks = bookMapper.getBook(book.getBookId());
+
+        if(newBooks.size() != 1) {
+            throw new ServiceException("服务器内部错误, 请稍后重试");
+        }
+        return newBooks.get(0);
+
+    }
+
+    public void deleteBook(String bookID){
+
+        Integer res = bookMapper.deleteBook(bookID);
+
+        if(res < 0){
+            throw new ServiceException("删除失败, 请重试");
+        }
+
+    }
+
 }

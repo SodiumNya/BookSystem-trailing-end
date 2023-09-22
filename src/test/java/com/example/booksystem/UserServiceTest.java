@@ -1,6 +1,6 @@
 package com.example.booksystem;
 
-import com.example.booksystem.entity.User;
+import com.example.booksystem.core.entity.User;
 import com.example.booksystem.mapper.WebMapper;
 import com.example.booksystem.service.RegisterService;
 import com.example.booksystem.service.UserService;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @RunWith(SpringRunner.class)

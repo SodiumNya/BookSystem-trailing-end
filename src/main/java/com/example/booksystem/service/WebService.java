@@ -1,6 +1,6 @@
 package com.example.booksystem.service;
 
-import com.example.booksystem.entity.User;
+import com.example.booksystem.core.entity.User;
 import com.example.booksystem.expection.ServiceException;
 import com.example.booksystem.mapper.WebMapper;
 import com.example.booksystem.uitls.TokenUtils;

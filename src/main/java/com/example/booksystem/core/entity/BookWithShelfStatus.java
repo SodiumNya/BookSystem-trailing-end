@@ -1,4 +1,4 @@
-package com.example.booksystem.entity;
+package com.example.booksystem.core.entity;
 
 import lombok.Data;
 

@@ -12,17 +12,25 @@
         limit #{start}, #{size}
     </select>
 
+    <select id="getCount">
+        select count(*) as total from book
+        where
+        book_title like concat('%', #{data}, '%')
+        or
+        book_author like concat('%', #{data}, '%')
+    </select>
+
     <select id="getBook" resultType="Book">
         select * from book
         where
         book_id = #{bookId}
     </select>
 <!--    resultMap的属性配置得按照constructor、id、result、association、collection、discriminator的顺序。-->
-    <resultMap id="findBookWithShelfStatusMap" type="com.example.booksystem.entity.BookWithShelfStatus">
+    <resultMap id="findBookWithShelfStatusMap" type="com.example.booksystem.core.entity.BookWithShelfStatus">
 
         <result property="addedToShelf" column="added_to_shelf"/>
 
-        <association property="book" javaType="com.example.booksystem.entity.Book">
+        <association property="book" javaType="com.example.booksystem.core.entity.Book">
             <id property="bookId" column="book_id"/>
             <result property="bookTitle" column="book_title"/>
             <result property="bookAuthor" column="book_author"/>
@@ -44,7 +52,20 @@
         on b.book_id = ub.book_id and ub.uid = #{uid}
         where b.book_id = #{bookId}
     </select>
-    
 
+    <update id="updateBook" parameterType="Book">
+        update book set
+            book_title = #{book.bookTitle},
+            book_author = #{book.bookAuthor},
+            book_cover = #{book.bookCover},
+            book_content = #{book.bookContent},
+            book_intro = #{book.bookIntro}
+        where book_id = #{book.bookId}
+    </update>
+
+    <delete id="deleteBook">
+        delete from book
+        where book_id = #{bookId}
+    </delete>
     
 </mapper>

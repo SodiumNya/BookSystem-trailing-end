@@ -1,8 +1,10 @@
 package com.example.booksystem.mapper;
 
-import com.example.booksystem.entity.User;
+import com.example.booksystem.core.entity.User;
+import com.example.booksystem.core.vo.SplitPageDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 
@@ -18,4 +20,8 @@ public interface AdminMapper {
             @Param("size") Integer size);
 
     Integer reSetAvatar(@Param("uid") String uid, @Param("avatarUrl") String avatarUrl);
+
+    Integer deleteUser(String uid);
+
+    SplitPageDTO getCount(@Param("selectedRole") String selectedRole, @Param("searchInput") String searchInput);
 }

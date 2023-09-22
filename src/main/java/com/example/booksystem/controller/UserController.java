@@ -3,15 +3,13 @@ package com.example.booksystem.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.example.booksystem.common.RestBean;
-import com.example.booksystem.entity.Book;
-import com.example.booksystem.entity.User;
+import com.example.booksystem.core.entity.Book;
+import com.example.booksystem.core.entity.User;
 import com.example.booksystem.expection.ServiceException;
 import com.example.booksystem.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -44,17 +42,6 @@ public class UserController {
 
         return RestBean.failure(401, "修改失败").asJsonString();
     }
-
-    @PostMapping("/api/update/basic/avatar")
-    public String updateUserAvatar(@RequestParam("uid") String uid, @RequestPart("avatar") MultipartFile avatar) throws IOException {
-        if ((avatar == null || avatar.isEmpty()) || StrUtil.isBlank(uid)){
-            throw new ServiceException("参数不合法");
-        }
-        String avatarUrl = userService.updateUserAvatar(avatar, uid);
-
-        return RestBean.success(avatarUrl).asJsonString();
-    }
-
 
     @PostMapping("/api/update/core")
     public String updateCoreInfo(@RequestBody User user){

@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.booksystem.entity.User;
+import com.example.booksystem.core.entity.User;
 import com.example.booksystem.service.UserService;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;

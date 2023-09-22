@@ -2,7 +2,7 @@ package com.example.booksystem.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.example.booksystem.common.RestBean;
-import com.example.booksystem.entity.User;
+import com.example.booksystem.core.entity.User;
 import com.example.booksystem.service.WebService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;

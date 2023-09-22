@@ -1,7 +1,7 @@
 package com.example.booksystem.mapper;
 
-import com.example.booksystem.entity.Book;
-import com.example.booksystem.entity.User;
+import com.example.booksystem.core.entity.Book;
+import com.example.booksystem.core.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;

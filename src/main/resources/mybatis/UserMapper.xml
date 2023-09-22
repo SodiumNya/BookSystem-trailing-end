@@ -16,6 +16,7 @@
     <update id="updateBasicInfo" parameterType="User">
         update user set
         nickname = #{user.nickname},
+        user.avatar = #{user.avatar},
         user.describe = #{user.describe}
         where uid = #{user.uid}
     </update>

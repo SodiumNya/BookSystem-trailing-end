@@ -1,7 +1,8 @@
 package com.example.booksystem.mapper;
 
-import com.example.booksystem.entity.Book;
-import com.example.booksystem.entity.BookWithShelfStatus;
+import com.example.booksystem.core.entity.Book;
+import com.example.booksystem.core.entity.BookWithShelfStatus;
+import com.example.booksystem.core.vo.SplitPageDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,4 +16,9 @@ public interface BookMapper {
 
     List<BookWithShelfStatus> findBookWithShelfStatus(@Param("bookId")String bookId, @Param("uid")String uid);
 
+    Integer updateBook(@Param("book") Book book);
+
+    Integer deleteBook(String bookId);
+
+    SplitPageDTO getCount(String data);
 }

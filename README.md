@@ -6,7 +6,7 @@
 ## 注意
 此处为后端部分，前端部分在：
 ```sh
-https://github.com/sodiumnya/BookSystem-front-end.git
+https://github.com/SodiumNya/BookSystem-front-end.git
 ```
 
 
@@ -35,8 +35,8 @@ https://github.com/sodiumnya/BookSystem-front-end.git
 
 使用 Git 将项目克隆到本地：
 
-```bash
-git clone https://github.com/sodiumnya/BookSystem-training-end.git
+```bash[
+git clone https://github.com/sodiumnya/BookSystem-training-end.git](https://github.com/SodiumNya/BookSystem-trailing-end.git)
 ```
 ### springboot
 ``sh

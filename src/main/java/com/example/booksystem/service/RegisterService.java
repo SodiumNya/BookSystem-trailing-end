@@ -1,6 +1,6 @@
 package com.example.booksystem.service;
 
-import com.example.booksystem.entity.User;
+import com.example.booksystem.core.entity.User;
 import com.example.booksystem.mapper.RegisterMapper;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
