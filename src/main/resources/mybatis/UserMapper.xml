@@ -13,6 +13,10 @@
         select * from user where uid = #{uid}
     </select>
 
+    <select id="getUserByUsername" resultType="User">
+        select * from user where username = #{username}
+    </select>
+
     <update id="updateBasicInfo" parameterType="User">
         update user set
         nickname = #{user.nickname},

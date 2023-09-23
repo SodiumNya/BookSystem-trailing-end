@@ -67,4 +67,5 @@ public class AdminController {
         adminService.deleteUser(uid);
         return RestBean.success("删除成功！").asJsonString();
     }
+
 }

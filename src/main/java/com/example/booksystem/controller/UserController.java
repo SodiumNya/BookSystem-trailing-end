@@ -23,6 +23,9 @@ public class UserController {
     @PostMapping("/api/add/user")
     public String insertUser(@RequestBody User user) {
 
+        if(user == null){
+            return RestBean.failure(401, "请求参数错误").asJsonString();
+        }
         Integer res = userService.insertUser(user);
         if (res >= 0) {
             return RestBean.success("success").asJsonString();

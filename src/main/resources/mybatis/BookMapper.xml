@@ -67,5 +67,27 @@
         delete from book
         where book_id = #{bookId}
     </delete>
+
+    <select id="findBookAuthorByName">
+        select author_name
+        from author
+        where author_name = #{authorName}
+    </select>
+
+    <select id="findBookByTitleAndAuthor">
+        select book_id
+        from book
+        where book_author = #{authorName} and book_title = #{bookName}
+    </select>
+
+    <insert id="addAuthor">
+        insert into author(author_name)
+        values(#{authorName})
+    </insert>
+
+    <insert id="addBook">
+        insert into book(book_title, book_author, book_content, book_intro, book_cover)
+        values(#{book.bookTitle}, #{book.bookAuthor}, #{book.bookContent}, #{book.bookIntro}, #{book.bookCover})
+    </insert>
     
 </mapper>

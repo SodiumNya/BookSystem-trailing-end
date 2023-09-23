@@ -19,6 +19,11 @@ public class UserService {
 
     public Integer insertUser(User user){
 
+        List<User> users = userMapper.getUserByUsername(user.getUsername());
+        if(!users.isEmpty()){
+            throw new ServiceException("402", "该账户已注册");
+        }
+
        Integer res = userMapper.insertUser(user);
        System.out.println("返回结果"+res);
        return res;

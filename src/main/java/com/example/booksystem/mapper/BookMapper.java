@@ -21,4 +21,12 @@ public interface BookMapper {
     Integer deleteBook(String bookId);
 
     SplitPageDTO getCount(String data);
+
+    Integer addBook(@Param("book") Book book);
+
+    Integer addAuthor(@Param("authorName") String authorName);
+
+    List<String> findBookAuthorByName(@Param("authorName") String authorName);
+
+    List<Book> findBookByTitleAndAuthor(@Param("authorName") String authorName, @Param("bookName") String bookName);
 }

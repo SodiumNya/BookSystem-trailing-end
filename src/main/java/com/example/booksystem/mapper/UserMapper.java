@@ -15,6 +15,8 @@ public interface UserMapper {
 
     List<User> getUserById(String uid);
 
+    List<User> getUserByUsername(String username);
+
     Integer updateBasicInfo(@Param("user") User user);
     Integer updateCoreInfo(@Param("user") User user);
 

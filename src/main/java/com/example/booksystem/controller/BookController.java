@@ -64,4 +64,16 @@ public class BookController {
         return RestBean.success("删除成功").asJsonString();
 
     }
+
+    @PostMapping("api/add/book")
+    public String addBook(@RequestBody Book book){
+        if(book == null){
+            return RestBean.failure(401, "请求参数错误").asJsonString();
+        }
+
+        bookService.addBook(book);
+
+        return RestBean.success("添加成功").asJsonString();
+
+    }
 }

@@ -1,6 +1,5 @@
 package com.example.booksystem.service;
 
-import com.example.booksystem.common.RestBean;
 import com.example.booksystem.core.entity.Book;
 import com.example.booksystem.core.entity.BookWithShelfStatus;
 import com.example.booksystem.core.request.Result;
@@ -98,6 +97,28 @@ public class BookService {
             throw new ServiceException("删除失败, 请重试");
         }
 
+    }
+
+    public void addBook(Book book){
+
+        List<Book> bookList = bookMapper.findBookByTitleAndAuthor(book.getBookAuthor(), book.getBookTitle());
+        if(!bookList.isEmpty()){
+            throw new ServiceException("402", "该书已存在书库, 请勿重复添加");
+        }
+
+        List<String> authors = bookMapper.findBookAuthorByName(book.getBookAuthor());
+        if(authors.isEmpty()){
+           Integer res = bookMapper.addAuthor(book.getBookAuthor());
+           if(res < 0){
+               throw new ServiceException("500", "内部错误, 请等会试试");
+           }
+        }
+
+        Integer res = bookMapper.addBook(book);
+
+        if(res < 0){
+            throw new ServiceException("添加, 请重试");
+        }
     }
 
 }
