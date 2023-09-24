@@ -17,7 +17,7 @@ public interface WebMapper {
     @Select("select * from user where #{user.username} = username")
     List<User> getUserById(@Param("user") User user);
 
-    @Insert("insert into user(username, password, role) values(#{user.username}, #{user.password}, #{user.role})")
+    @Insert("insert into user(username, password, nickname, role) values(#{user.username}, #{user.password}, #{user.nickname}, #{user.role})")
     Integer insertUser(@Param("user") User user);
 
     @Select("select role_name from role")

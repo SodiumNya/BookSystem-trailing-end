@@ -16,7 +16,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 public class JwtInterception implements HandlerInterceptor {
 
-    private static final String ERR_CODE_401 = "401";
+    private static final String ERR_CODE_401 = "403";
 
     @Resource
     private UserService userService;

@@ -33,6 +33,7 @@ public class WebService {
         if(!users.isEmpty()){
             return 0;
         }
+        user.setNickname(user.getUsername());
         Integer res = webMapper.insertUser(user);
         System.out.println("返回结果"+res);
         return res;
