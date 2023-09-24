@@ -20,7 +20,7 @@ https://github.com/SodiumNya/BookSystem-front-end.git
 - 页面设计 HTML+css
 
 ### 后端
-- 开发框架 springboot
+- 开发框架 springboot bootstrap5
 - 主语言 Java
 - 数据库 mysql
 - 中间件 mybatis
